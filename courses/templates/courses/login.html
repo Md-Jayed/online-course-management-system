@@ -1,0 +1,72 @@
+{% extends 'courses/base.html' %}
+{% load course_custom_tags %}
+{% load widget_tweaks %}
+{%block title%}
+Signup
+{% endblock %}
+
+{%block content%}
+
+<div class="container login-page" style="align-items:inherit">
+<div class="row">
+ <div class="col-6 offset-3">
+     
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Login Here</p>
+
+      <form method="post" action="">
+      {% csrf_token %}
+        <div class="input-group mb-3">
+          {% render_field form.username class="form-control" placeholder="Email" %}
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          {% render_field form.password class="form-control" placeholder="Password" %}
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+      <!-- /.social-auth-links -->
+      {% if form.non_field_errors %}
+     {% for error in form.non_field_errors %}
+       <p class='alert alert-danger my-3'>{{error}}</p>
+     {% endfor %}
+ 
+   {% endif %}
+
+      <p class="mb-0">
+        <a href="/signup" class="text-center">Register a new membership</a>
+      </p>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+
+ 
+ </div>
+</div>
+</div>
+
+
+
+{%endblock%}
+

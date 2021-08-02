@@ -1,0 +1,44 @@
+<nav id="navbar" class="navbar order-last order-lg-0 ">
+        <ul>
+          <li><a class="active" href="{% url 'home' %}">Home</a></li>
+          <li><a href="#">About</a></li>
+          {% comment %} <li><a href="/course">Courses</a></li> {% endcomment %}
+          <li class="nav-item">
+          <li class="nav-item dropdown">
+             <a class="nav-link dropdown-toggle" href="#" id="electronicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               Department
+             </a>
+             <ul class="dropdown-menu" aria-labelledby="electronicsDropdown">
+               <li><a class="dropdown-item" href="{% url 'cse' %}">CSE</a></li>
+               <li><a class="dropdown-item" href="{% url 'bba' %}">BBA</a></li>
+               <li><a class="dropdown-item" href="#">ENGLISH</a></li>
+             </ul>
+          </li> 
+            </li>
+           {% if request.user.is_authenticated %}
+
+              <li class="nav-item">
+                <a class="nav-link" href="/my-courses">My Courses</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
+
+              {% else %}
+            <li class="nav-item">
+              <a class="/login" href="/login">Login</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="/signup" href="/signup">Signup</a>
+            </li>
+
+            {% endif %}
+          <li> <form class="d-flex" method='get' action='/search'>
+                 <input class="form-control me-2 ml-2" type="search" placeholder="Search" aria-label="Search" name='query' id='query'>
+                 <button class="btn btn-outline-success" type="submit">Search</button>
+               </form>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>

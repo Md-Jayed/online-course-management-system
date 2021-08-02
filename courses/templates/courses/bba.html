@@ -1,0 +1,79 @@
+{% extends 'courses/base.html' %}
+{% load static %}
+{% load course_custom_tags %}
+{% block content %}
+<br><br><br>
+
+ <div class="container my-5">
+ <h1>Bachelor of Business Administration</h1>
+<hr>
+ <div class="row">
+  <div class="col-sm-3">
+   <div class="list-group">
+  <a href="{% url 'bba' %}" class="list-group-item list-group-item-action" aria-current="true">
+    All COURSES
+  </a>
+  <a href="{% url 'bba' 'Management' %}" id="Adidas" class="list-group-item list-group-item-action">Management</a>
+  <a href="{% url 'bba' 'Accounting' %}" class="list-group-item list-group-item-action">Accounting</a> 
+  <a href="{% url 'bba' 'below'%}" id="below" class="list-group-item list-group-item-action">Below 20%</a>
+  <a href="{% url 'bba' 'above'%}" id="above" class="list-group-item list-group-item-action">Above 20%</a>
+</div>
+  </div>
+  <div class="col-sm-8 offset-sm-1">
+   <div class="row">
+      {% for bba in bba %}
+         <div class="col-4">
+            <div class="card mr-2" style="width: 12rem;">
+                <img class="card-img-top" src="{{bba.thumbnail.url}}" alt="Card image cap"'>
+                <div class="card-body">
+                    <h5 class="card-title">{{bba.name}}</h5>
+                    <p class="card-text m-0 p-0">
+                        Save {{bba.discount}}%
+                        <br>
+                        <span class="price">
+                            <del>{{bba.price|rupee}}</del>
+                            &nbsp;
+
+                            <span>{% cal_sellprice bba.price bba.discount as value %} {{value|rupee}}</span>
+                        </span>
+
+                    </p>
+                </div>
+
+                <div class="card-footer p-0">
+                    {% is_enrolled request bba as enrolled %}
+
+
+                    <div class="row no-gutters">
+                        {% if enrolled %}
+                        <div class="col border-right">
+                            <a href="/course/{{bba.slug}}" class="btn btn-light btn-block">Start Course</a>
+                        </div>
+                        {% else %}
+                        <div class="col-6 border-right">
+                            <a href="/check-out/{{bba.slug}}" class="btn btn-light btn-block">Enroll Now</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="/course/{{bba.slug}}" class="btn btn-light  btn-block">Show More</a>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+     {% comment %} <div class="col-sm-4 text-center mb-4">
+     <a href="{% url 'cse' cse.id %}" class="btn"><div class="item"><img src="{{cse.thumbnail.url}}" alt="" height="200px"><br><span class="fw-bold">{{cse.name}}</span><br><span class="fs-5">TK. {{cse.discounted_price}}</span></div></a>
+     </div> {% endcomment %}
+     
+     {% endfor %} 
+   </div>
+  </div>
+ </div>
+</div> 
+{% endblock %}

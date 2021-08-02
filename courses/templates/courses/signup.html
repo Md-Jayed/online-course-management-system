@@ -1,0 +1,107 @@
+{% extends 'courses/base.html' %}
+{% load course_custom_tags %}
+{% load widget_tweaks %}
+{%block title%}
+Signup
+{% endblock %}
+
+{%block content%}
+
+ <br> <br>
+<div class="container login-page" style="align-items:inherit">
+<div class="row">
+ <div class="col-6 offset-3">
+
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Login Here</p>
+
+      <form method="POST" action="/signup" novalidate>
+      {% csrf_token %}
+        <div class="input-group mb-3">
+          {% render_field form.first_name class="form-control" placeholder="First Name" %}
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+         <small class='text-danger'>{{form.first_name.errors|striptags}}</small>
+         <div class="input-group mb-3">
+          {% render_field form.last_name class="form-control" placeholder="Lastname" %}
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <small class='text-danger'>{{form.last_name.errors|striptags}}</small>
+         <div class="input-group mb-3">
+          {% render_field form.username class="form-control" placeholder="Username" %}
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <small class='text-danger'>{{form.username.errors|striptags}}</small>
+         <div class="input-group mb-3">
+          {% render_field form.email class="form-control" placeholder="Email" %}
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <small class='text-danger'>{{form.email.errors|striptags}}</small>
+        <div class="input-group mb-3">
+          {% render_field form.password1 class="form-control" placeholder="Password" %}
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <small class='text-danger'>{{form.password1.errors|striptags}}</small>
+        <div class="input-group mb-3">
+          {% render_field form.password2 class="form-control" placeholder="CPassword" %}
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <small class='text-danger'>{{form.password2.errors|striptags}}</small>
+        <div class="row">
+          <div class="col-8">
+            
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+      <!-- /.social-auth-links -->
+ {% if form.non_field_errors %}
+     {% for error in form.non_field_errors %}
+       <p class='alert alert-danger my-3'>{{error}}</p>
+     {% endfor %}
+ 
+   {% endif %}
+      <p class="mb-0">
+        <a href="/login" class="text-center">Login Here</a>
+      </p>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+
+ 
+ </div>
+</div>
+</div>
+
+{%endblock%}
